@@ -22,22 +22,6 @@
         "footer";
     }
 
-    /* Navigation */
-    /* #side-bar{
-        z-index:-1;
-        border-radius: 10px;
-        padding:5px;
-        grid-area: nav;
-        position: fixed;
-        min-width:300px;
-        min-height: 300px;
-        margin-left: 20px;
-        margin-right: 50px;
-        top:50px;
-        right:0px;
-        background-color:rgb(69, 65, 94);
-    } */
-
 
     /* Header */
     .greeting{
@@ -119,21 +103,7 @@
         "entry entry entry"
         "empty date date";
     }
-
-    /* #card2{
-        grid-area:card2;
-        padding:10px;
-        background-color:rgb(65, 131, 125);
-        margin:1px;
-        border-radius: 10px;
-        box-shadow:0 4px 8px 0 rgb(79, 93, 99);
-        display:grid;
-        grid-template-areas:
-        "feel feel feel weather"
-        "entry entry entry entry"
-        "entry entry entry entry";
-    } */
-
+    
     .card-heading{
         background-color:thistle;
         grid-area: feel;

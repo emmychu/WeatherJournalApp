@@ -277,34 +277,34 @@ function sendUserData(feeling,entry){
             }
         }
 
-        //Set time
-        function getCurrentTime(){
-            let hour = today.getHours()
-            let minutes = today.getMinutes()
-            if(hour > 12){
-                hour -= 12;
-                if(minutes < 10){
-                    return `${hour}:0${minutes}pm`
-                }else{
-                    return `${hour}:${minutes}pm`
-                }
+    //Set time
+    function getCurrentTime(){
+        let hour = today.getHours()
+        let minutes = today.getMinutes()
+        if(hour > 12){
+            hour -= 12;
+            if(minutes < 10){
+                return `${hour}:0${minutes}pm`
+             }else{
+                return `${hour}:${minutes}pm`
+            }
+        }else{
+            if(minutes < 10){
+                return `${hour}:0${minutes}am`
             }else{
-                if(minutes < 10){
-                    return `${hour}:0${minutes}am`
-                }else{
-                    return `${hour}:${minutes}am`
-                }
+                return `${hour}:${minutes}am`
             }
         }
+    }
 
 //Remove weather icon from entry if screen size too small
-document.addEventListener("resize",()=>{
-    if(window.innerWidth < 500){
-        alert("window")
-       let iconList = document.getElementsByClassName("entry-icons")
-       console.log("hi")
-       for(let icon = 0; icon < iconList; icon++){
-           iconList[icon].remove()
-       }
-    }
-})
+    document.addEventListener("resize",()=>{
+        if(window.innerWidth < 500){
+            alert("window")
+        let iconList = document.getElementsByClassName("entry-icons")
+        console.log("hi")
+        for(let icon = 0; icon < iconList; icon++){
+            iconList[icon].remove()
+        }
+        }
+    })
