@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Gentle Musings...</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/minstyle.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap" rel="stylesheet">
+    </head>
+
+    <body class = "container">
+        <div class = "greeting">
+            <!--Displays Hello USER-->
+            <h1 id = "welcome">Hello! Why don't you tell me about your day?</h1>
+            <!--Enter zipcode (to retrieve weather data I think>>)-->
+            <div id="zipfont" class ="zipcode">First, why don't you tell me your zipcode?<br> <input id = "zip" class="zipcode" type="text"placeholder="Please input your zipcode!">
+                <input class ="zipcode" id="generate" type="submit"></input></input>
+            </div>
+        </div>
+        <div class = "card-holder">
+            <card id= "card1" class = "entries">
+                <h2 id = "first-card-heading" class = "card-heading">I'm feeling GOOD!</h2>
+                <div class = "weather"><img id="first-weather" class="entry-icons" src="css/images/icons/thunderstorm.png"></div>
+                <p id="first-entry" class = "entry">Hello! This is what an entry would look like after submission.</p>
+                <a id ="first-date" class= "entry-date">01/01/2021</a>
+            </card>
+        </div>
+        <div class ="submit">
+            <div class ="new-entry">
+                <div class = "feeling">
+                    <input id = "feels" type="text" placeholder="How are you feeling?"></input>
+                </div>
+                <br>
+                <div id ="description">
+                    <textarea id = "description-box" placeholder="Tell me about your day!" rows="4" cols="50"></textarea>
+                </div>
+                <center><input id = "journal-submit" class = "submit-button" type="submit"></input></center>
+            </div>
+        </div>
+        <footer class="footer">
+            <p id="disclaimer"><b>These images were borrowed! I do not claim ownership of these images! Thank you!</b></p>
+            <!-- <div><a href="https://www.facebook.com/" target="_blank"><img class="logo" src="Images/facebook+logo+logo+website+icon-1320190502625926346.png"></a></div>
+            <div><a href="https://www.twitter.com/" target="_blank"><img class="logo" src="Images/Twitter-logo-on-transparent-background-PNG.png"></a></div>
+            <div><a href="https://www.instagram.com/" target="_blank"><img class="logo" src="Images/Instagram-Logo.wine.png"></a></div> -->
+        </footer>
+        <script src="app.js"></script>
+    </body>
+</html>
+

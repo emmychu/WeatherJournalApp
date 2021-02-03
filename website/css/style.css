@@ -1,0 +1,223 @@
+
+body{
+    background-image:url("images/wallpapers/clear/ae832db6ec8e3515909db883da69696e.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size:cover;
+    position:relative;
+}
+
+.container {
+    padding:10px;
+    display:grid;
+    margin:0 auto;
+    max-width:1000px;
+    max-height:auto;
+    grid-template-areas:
+    "greeting"
+    "submit"
+    "card-holder"
+    "footer";
+}
+
+/* Navigation */
+/* #side-bar{
+    z-index:-1;
+    border-radius: 10px;
+    padding:5px;
+    grid-area: nav;
+    position: fixed;
+    min-width:300px;
+    min-height: 300px;
+    margin-left: 20px;
+    margin-right: 50px;
+    top:50px;
+    right:0px;
+    background-color:rgb(69, 65, 94);
+} */
+
+
+/* Header */
+.greeting{
+    display:grid;
+    font-family: 'Bodoni Moda', serif;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    opacity:70%;
+    grid-area: greeting;
+    text-align:center;
+    justify-items: center;
+    padding:10px;
+    grid-template-areas:
+    "welcome"
+    "icon"
+    "zip";
+    background-image:linear-gradient(pink,lightskyblue)
+}
+.greeting:hover{
+    opacity:80%;
+}
+
+h1{
+    grid-area: welcome;
+    padding-bottom: 0px;
+}
+.current-weather{
+    color:black;
+}
+.current-weather:hover{
+    color: fuchsia;
+}
+
+#zipfont{
+    font-weight:bold;
+}
+
+/* Footer */
+footer{
+    opacity:65%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    grid-area: footer;
+    display:flex;
+    padding:10px;
+    background-image:linear-gradient(rgb(224, 200, 148),slateblue);
+    color:black;
+    justify-content: center;
+    font-family: 'Bodoni Moda', serif;
+}
+
+footer:hover{
+    opacity:85%; 
+}
+
+/* Card area */
+.card-holder{
+    font-family: 'Crimson Pro', serif;
+    display:grid;
+    grid-area: card-holder;
+    max-width:1000px;
+    padding:10px;
+    grid-gap: 5px;
+}
+
+.entries{
+    background-image: linear-gradient(lightskyblue,rgb(224, 200, 148));
+    opacity: 75%;
+    min-height: 400px;
+    min-width:400px;
+    padding:10px;
+    margin:15px;
+    border-radius: 10px;
+    box-shadow:0 4px 8px 0 rgb(79, 93, 99);
+    display:grid;
+    grid-template-areas:
+    "feel feel feel weather"
+    "entry entry entry entry"
+    "entry entry entry entry"
+    "empty empty date date";
+}
+
+/* #card2{
+    grid-area:card2;
+    padding:10px;
+    background-color:rgb(65, 131, 125);
+    margin:1px;
+    border-radius: 10px;
+    box-shadow:0 4px 8px 0 rgb(79, 93, 99);
+    display:grid;
+    grid-template-areas:
+    "feel feel feel weather"
+    "entry entry entry entry"
+    "entry entry entry entry";
+} */
+
+.card-heading{
+    background-color:thistle;
+    grid-area: feel;
+    padding:10px;
+    font-size:30px;
+    border-radius:10px;
+    margin:10px;
+    text-align:center;
+    max-height:40px;
+    min-width: 350px;
+}
+
+.weather{
+    display:flex;
+    justify-content: center;
+    grid-area: weather;
+    padding:10px;
+    align-items:center;
+}
+
+
+.entry-icons{
+    max-height:50px;
+    align-items: center;
+    opacity:100%;
+}
+.entry{
+    color:white;
+    font-size:20px;
+    grid-area: entry;
+    margin:15px;
+    padding:15px;
+    min-height:275px;
+    min-width:200px;
+    background-color:rgb(28, 58, 83);
+}
+.entry:hover{
+    opacity:90%;
+}
+
+.entry-date{
+    opacity:100%;
+    grid-area:date;
+    text-align:center;
+}
+
+
+
+/* Submission Area */
+
+.submit{
+    font-size:20px;
+    grid-area: submit;
+    text-align:center;
+    opacity:70%;
+    justify-content: center;
+    padding: 10px;
+    display: grid;
+    background-color: lightskyblue;
+    grid-template-areas:
+    "feel feel feel"
+    "feel feel feel"
+    "day day day day"
+    "submit submit submit";
+}
+.submit:hover{
+    opacity:90%;
+}
+.feeling{
+    grid-area: feel;
+}
+
+.current-weather{
+    grid-area: weather;
+}
+
+.submit-button{
+    grid-area: submit;
+}
+
+#description{
+    grid-area: day;
+}
+
+#description-box{
+    max-width:600px;
+    max-height: 200px;
+}
+
