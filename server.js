@@ -32,8 +32,6 @@ function listening(){
     console.log(`running on localhost: ${port}`)
 };
 
-// Callback to debug
-
 // Initialize all route with a callback function
 
 app.get('/all', sendData);
