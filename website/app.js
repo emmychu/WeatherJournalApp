@@ -1,9 +1,7 @@
 // Global Variables
 const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip="
 const zipText = document.getElementById("zip");
-const zipButton = document.getElementById("generate");
-const updateSubmit = document.getElementById("journal-submit");
-const userName = document.getElementById("name-value");
+const updateSubmit = document.getElementById("generate");
 const body = document.getElementsByTagName("body")[0];
 
 //Date functions
@@ -16,38 +14,31 @@ let currentTime = getCurrentTime()
 const api = ",us&units=imperial&appid=924ecca5b51816bbb81c4d4d9fe65e5b"
 
 //Event Listeners
-    // Event listener to add function to existing HTML DOM element
-    zipButton.addEventListener("click", submitZip);
-    document.getElementById("zip").addEventListener("keypress", function(enterKey){
-        if(enterKey.key === 'Enter'){
-            submitZip()
-        }
-    })
-
-    //Event listener for Journal Update
-    updateSubmit.addEventListener("click", submitEntry);
+updateSubmit.addEventListener("click", submitEntry);
 
 /* Functions called by event listener */
-    //Function to submit Zipcode
-    function submitZip(){
-        const userZip = zipText.value;
+    //Function to submit Entry
+    function submitEntry(){
+        let userZip = zipText.value;
         if(zipText.value.length === 5){
-            getWeather(baseURL, userZip, api);
+            getWeather(baseURL, userZip, api)
+            .then((weatherData) =>{
+                console.log(weatherData);
+                let temp = weatherData[0]
+                let weatherID = weatherData[1]
+                let userFeeling = document.getElementById("feels").value
+                let userBox = document.getElementById("description-box").value
+                if(userFeeling.length === 0 || userBox.length === 0){
+                    alert("Please make sure both boxes are not empty! Thank you :)")
+                }else{
+                    sendUserData(userFeeling,userBox,temp,weatherID)
+                    document.getElementById("feels").value = ""
+                    document.getElementById("description-box").value = ""
+                    zipText.value = ""
+                }
+            })
         }else{
             alert("Please input a valid 5 digit zipcode!");
-        }
-    }
-
-    //Function to submit Entry
-    async function submitEntry(){
-        let userFeeling = document.getElementById("feels").value
-        let userBox = document.getElementById("description-box").value
-        if(userFeeling.length === 0 || userBox.length === 0){
-            alert("Please make sure both boxes are not empty! Thank you :)")
-        }else{
-            sendUserData(userFeeling,userBox)
-            document.getElementById("feels").value = ""
-            document.getElementById("description-box").value = ""
         }
     }
 
@@ -56,8 +47,12 @@ const getWeather = async(baseURL, zip, api) => {
     let response = await fetch(baseURL + zip + api);
     try{
         let data = await response.json()
+        let temp = data.main.temp
+        let weatherID = data['weather'][0]['id']
         changeHeader(data);
-        backgroundUpdate(data['weather'][0]['id']);
+        backgroundUpdate(weatherID);
+        let weatherData = [temp,weatherID]
+        return weatherData
     }
     catch(error){
         console.log("error", error);
@@ -95,14 +90,11 @@ const retrieveData = async (url='') =>{
   };
   
 // TODO-Call the chained function
-function sendUserData(feeling,entry){
-    const userZip = zipText.value;
-    const currentTemp = document.getElementById("temp").innerText;
-    const weatherText = document.getElementById("weather-icon").alt;
-    const weatherID = weatherText.slice(weatherText.length-3 , weatherText.length)
+function sendUserData(feeling,entry,temperature,weatherID){
+    let userZip = zipText.value;
     postData('/add', {
         'zipcode': userZip,
-        'temperature': currentTemp,   
+        'temperature': temperature,   
         'date': newDate,
         'feeling': feeling,
         'entry': entry,
@@ -121,13 +113,8 @@ function sendUserData(feeling,entry){
     function changeHeader(data){
         let currentWeather = data.weather[0].description;
         let currentTemp = data.main.temp
-        document.getElementById("welcome").insertAdjacentHTML("afterend",`<div id="today-weather"><h2>The current weather is <a class ="current-weather" >${currentWeather}</a> and the temperature is <a id = "temp" class ="current-weather">${currentTemp}°F</a></h2></div>`)
+        document.getElementById("today-weather").innerHTML =`<h2>The current weather is <a class ="current-weather" >${currentWeather}</a> and the temperature is <a id = "temp" class ="current-weather">${currentTemp}°F</a></h2>`
         document.getElementById("today-weather").style.cssText = `grid-area: zip; font-size: 12px; color: navy; padding-top:0px;`;
-        const zipElements = document.getElementsByClassName("zipcode")
-        for(let n = 0; n < zipElements.length; n++){
-            zipElements[n].remove();
-        };
-        alert("Now please, how was your day? :)")
     }
 
     //Function to update card after entry submission
@@ -140,12 +127,11 @@ function sendUserData(feeling,entry){
         });       
     }
 
-    //Function to generate old entries
+    //Function to generate old entries from up to three days
     function generateEntries(data){
         const dates = Object.keys(data);
         let threeDays = getDates(dates)
         let oldEntries = getEntries(data,threeDays)
-        console.log(oldEntries)
         let cardHolder = document.getElementsByClassName("card-holder")[0];
         for(let entry = oldEntries.length-1; entry >= 0; entry--){
             let hour = oldEntries[entry]['militaryhour']
@@ -161,7 +147,10 @@ function sendUserData(feeling,entry){
                 <a class="entry-date">${oldEntries[entry]['date']} at ${oldEntries[entry]['time']}</a>`
             )
         }
-        document.getElementById("card1").remove();
+        let cardOne = document.getElementById("card1")
+        if(cardOne != null){
+            cardOne.remove();
+        }
     }
 
     //Function to retrieve last 3 dates
@@ -189,12 +178,23 @@ function sendUserData(feeling,entry){
         return entries
     }
 
-    //Function to change background dependent on weather
+    //Function to update UI
     function backgroundUpdate(weatherID){
         let weatherInfo = document.getElementById("today-weather")
-        weatherInfo.insertAdjacentHTML("beforebegin",`<img id="weather-icon" height="60px" width:"100%" alt="weather icon for current weather">`)
         let weatherIcon = document.getElementById("weather-icon")
-        weatherIcon.style.cssText= `gridArea = "icon"; padding-top:0px; padding-bottom:0px;`
+        if(weatherIcon === null){
+            weatherInfo.insertAdjacentHTML("beforebegin",`<img id="weather-icon" height="60px" width:"100%" alt="weather icon for current weather">`)
+            weatherIcon = document.getElementById("weather-icon")
+            weatherIcon.style.cssText= `gridArea = "icon"; padding-top:0px; padding-bottom:0px;`
+            update(weatherID, weatherIcon)
+        }else{
+            update(weatherID, weatherIcon)
+        }
+    } 
+
+    //Function to choose background and icon according to weather
+    function update(weatherID, weatherIcon){
+        body.style.backgroundImage = ``
         switch(true){
             case (weatherID >= 200 && weatherID < 300):
                 weatherIcon.src = "css/images/icons/thunderstorm.png"
@@ -240,15 +240,18 @@ function sendUserData(feeling,entry){
                 if(currentHour > 6 && currentHour < 18){
                     weatherIcon.src = "css/images/icons/clear-day.png"
                     weatherIcon.alt = "clear day icon" + weatherID
-                    break
                 }else{
                     weatherIcon.src = "css/images/icons/clear-night.png"
                     weatherIcon.alt = "cloudy night icon" + weatherID
                     body.style.backgroundImage = `url("css/images/wallpapers/clear/148418.jpg")`
                 }
-                break
-        }
-    } 
+                break;
+        }   
+    }
+
+
+
+
     //Function to return oldIcons
     function iconGeneration(weatherID,hour){
         switch(true){
@@ -302,7 +305,6 @@ function sendUserData(feeling,entry){
         if(window.innerWidth < 500){
             alert("window")
         let iconList = document.getElementsByClassName("entry-icons")
-        console.log("hi")
         for(let icon = 0; icon < iconList; icon++){
             iconList[icon].remove()
         }

@@ -11,11 +11,10 @@
 
     <body class = "container">
         <div class = "greeting">
-            <!--Displays Hello USER-->
             <h1 id = "welcome">Hello! Why don't you tell me about your day?</h1>
-            <!--Enter zipcode (to retrieve weather data I think>>)-->
-            <div id="zipfont" class ="zipcode">First, why don't you tell me your zipcode?<br> <input id = "zip" class="zipcode" type="text"placeholder="Please input your zipcode!">
-                <input class ="zipcode" id="generate" type="submit"></input></input>
+            <div id = "today-weather">
+            </div>
+            <div id="zipfont" class ="zipcode">Please insert your zipcode and then tell me about your day!<br> <input id = "zip" class="zipcode" type="text"placeholder="Please input your zipcode!">
             </div>
         </div>
         <div class = "card-holder">
@@ -35,7 +34,7 @@
                 <div id ="description">
                     <textarea id = "description-box" placeholder="Tell me about your day!" rows="4" cols="50" maxlength ="480"></textarea>
                 </div>
-                <center><input id = "journal-submit" class = "submit-button" type="submit"></input></center>
+                <center><input id = "generate" class = "submit-button" type="submit"></input></center>
             </div>
         </div>
         <footer class="footer">
