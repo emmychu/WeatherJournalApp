@@ -13,4 +13,7 @@ Type `node server.js` in terminal.
 ## Important notes
 The weather journal is coded to generate all entries for the last three days that entries were submitted, with the most recent appearing on top first. After zipcode is inputted,
 the next textbox will ask for an overall feeling (must be within 30 characters). Then the following textbox will ask for an elaboration (max 480 characters). Each entry will
-record the date, time and weather (shown in the form of an icon).
+record the date, time and weather (shown in the form of an icon). 
+
+## Updates
+User can now input different zipcodes and UI will update accordingly.
